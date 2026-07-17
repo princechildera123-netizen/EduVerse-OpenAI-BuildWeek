@@ -1,0 +1,9 @@
+import { Card } from '../../components/ui/Card';
+import { useLearningTwin } from '../learning-twin/hooks/useLearningTwin';
+import { FlashcardsSection, PlannerCard, ProductivityTracker, QuizGeneratorSection, TimerCard } from './components/StudyCoachComponents';
+import { dailySchedule, flashcards, homeworkPlan, quizPrompts, weeklyRevision } from './data/studyCoachData';
+
+export function StudyCoachPage() {
+  const { insights } = useLearningTwin();
+  return <div className="py-8 sm:py-12"><section className="rounded-[2rem] bg-white/80 p-6 shadow-xl shadow-slate-200/60"><p className="text-sm font-semibold text-brand">AI Study Coach</p><h1 className="mt-2 text-4xl font-black text-ink">A personalized plan for today’s momentum.</h1><p className="mt-3 max-w-2xl text-muted">The Study Coach consumes shared Learning Twin data and mock planner data without connecting to a backend.</p></section><div className="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem]"><main className="grid gap-6"><PlannerCard title="Daily study schedule" items={dailySchedule} /><PlannerCard title="Weekly revision planner" items={weeklyRevision} /><PlannerCard title="Homework planner" items={homeworkPlan} /><FlashcardsSection cards={flashcards} /><QuizGeneratorSection prompts={quizPrompts} /></main><aside className="grid content-start gap-6"><TimerCard /><ProductivityTracker /><Card><h2 className="text-xl font-black text-ink">Learning recommendations</h2><ul className="mt-4 grid gap-2 text-sm text-muted">{(insights?.studyRecommendations ?? ['Loading Learning Twin recommendations...']).map((item) => <li key={item}>• {item}</li>)}</ul><div className="mt-5 rounded-2xl bg-aqua/10 p-4"><h3 className="font-bold text-ink">Focus mode</h3><p className="mt-1 text-sm text-muted">Use visual examples first, then practice independently.</p></div></Card></aside></div></div>;
+}
