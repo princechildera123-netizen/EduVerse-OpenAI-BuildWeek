@@ -1,0 +1,7 @@
+import { DashboardHero, DashboardSection, MetricCard, ProgressBar } from '../shared-dashboard/components/DashboardPrimitives';
+import { InsightCards, SubjectPerformanceChart, TrendCards } from './components/AnalyticsComponents';
+import { analyticsInsights, learningTrends, subjectPerformance } from './data/analyticsData';
+
+export function AnalyticsPage() {
+  return <div className="py-8 sm:py-12"><DashboardHero eyebrow="AI Performance Analytics" title="Understand learning patterns at a glance." description="Review mock subject charts, learning trends, attendance, homework completion, strengths, weaknesses, and AI improvement recommendations." /><section className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"><MetricCard label="Attendance" value="97%" detail="Attendance overview remains strong" /><MetricCard label="Homework" value="86%" detail="Completion improved this week" /><MetricCard label="Strengths" value="3" detail="Science, reading, consistency" /><MetricCard label="Weaknesses" value="2" detail="Graphing and pacing" /></section><div className="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem]"><main className="grid gap-6"><SubjectPerformanceChart subjects={subjectPerformance} /><TrendCards trends={learningTrends} /><InsightCards insights={analyticsInsights} /></main><aside className="grid content-start gap-6"><DashboardSection title="Attendance overview"><ProgressBar label="Present" value={97} /></DashboardSection><DashboardSection title="Homework completion"><ProgressBar label="Completed" value={86} /></DashboardSection></aside></div></div>;
+}

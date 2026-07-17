@@ -1,0 +1,15 @@
+import { DashboardSection, SimpleList } from '../../shared-dashboard/components/DashboardPrimitives';
+import type { GeneratedNotes } from '../types/aiNotes';
+
+export function NotesInputPanel({ text, setText, generate }: { text: string; setText: (value: string) => void; generate: () => void }) {
+  return <DashboardSection title="Source notes"><label className="grid gap-2 text-sm font-bold text-ink" htmlFor="notes-text">Paste text<textarea id="notes-text" className="focus-ring min-h-40 rounded-2xl border border-slate-200 bg-white p-4 text-base" value={text} onChange={(event) => setText(event.target.value)} placeholder="Paste class notes, textbook excerpts, or revision material..." /></label><div className="mt-4 grid gap-3 sm:grid-cols-2"><label className="focus-within:ring-brand rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm font-bold text-ink">Upload notes UI only<input type="file" className="mt-2 block w-full text-sm text-muted" /></label><label className="focus-within:ring-brand rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm font-bold text-ink">Upload PDFs UI only<input type="file" accept="application/pdf" className="mt-2 block w-full text-sm text-muted" /></label></div><button type="button" onClick={generate} className="focus-ring mt-4 rounded-full bg-brand px-5 py-3 text-sm font-bold text-white shadow-lg shadow-brand/25">Generate mock notes</button></DashboardSection>;
+}
+
+export function GeneratedNotesPanel({ notes, save }: { notes: GeneratedNotes | null; save: () => void }) {
+  if (!notes) return <DashboardSection title="Generated results"><p className="text-muted">Generate notes to see summaries, flashcards, key points, practice questions, and quick revision sheets.</p></DashboardSection>;
+  return <DashboardSection title="Generated results"><div className="grid gap-4"><article className="rounded-2xl bg-slate-50 p-4"><h3 className="font-bold text-ink">Summary</h3><p className="mt-2 text-sm text-muted">{notes.summary}</p></article><SimpleList items={notes.flashcards.map((card) => ({ title: card.front, detail: card.back, meta: 'Flashcard' }))} /><SimpleList items={notes.keyPoints.map((point) => ({ title: point, detail: 'Key point' }))} /><SimpleList items={notes.practiceQuestions.map((question) => ({ title: question, detail: 'Practice question' }))} /><SimpleList items={notes.revisionSheet.map((item) => ({ title: item, detail: 'Quick revision sheet' }))} /><button type="button" onClick={save} className="focus-ring rounded-full border border-brand/20 bg-brand/10 px-5 py-3 text-sm font-bold text-brand">Save generated notes locally</button></div></DashboardSection>;
+}
+
+export function SavedNotesPanel({ notes }: { notes: GeneratedNotes[] }) {
+  return <DashboardSection title="Saved notes"><SimpleList items={notes.length ? notes.map((note) => ({ title: note.source, detail: new Date(note.createdAt).toLocaleString(), meta: 'Saved' })) : [{ title: 'No saved notes yet', detail: 'Saved generated notes will appear here.' }]} /></DashboardSection>;
+}

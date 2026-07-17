@@ -1,0 +1,6 @@
+import type { ExamPrediction } from '../types/prediction';
+
+export const predictions: ExamPrediction[] = [
+  { subject: 'Algebra II', predictedScore: 82, confidence: 78, passProbability: 91, burnoutRisk: 28, dropoutRisk: 8, weakTopics: ['Quadratic graphing', 'Factoring speed'], strongTopics: ['Linear systems', 'Function notation'], details: { score: { why: 'Recent homework accuracy is rising but graphing errors remain.', evidence: '86% homework completion and 68% exam readiness.', recommendedAction: 'Complete two graphing drills before Friday.' }, risk: { why: 'Workload is moderate and streak is healthy.', evidence: '12-day study streak with 2h 15m focus today.', recommendedAction: 'Keep sessions capped at 25 minutes.' } } },
+  { subject: 'Biology', predictedScore: 89, confidence: 84, passProbability: 96, burnoutRisk: 18, dropoutRisk: 5, weakTopics: ['Cell transport edge cases'], strongTopics: ['Ecosystems', 'Vocabulary recall'], details: { score: { why: 'Vocabulary recall and lab performance are strong.', evidence: 'Science mastery trend is 88%.', recommendedAction: 'Review cell transport diagrams once.' }, risk: { why: 'Current biology load is low.', evidence: 'Only one medium-priority task remains.', recommendedAction: 'Use active recall flashcards.' } } },
+];

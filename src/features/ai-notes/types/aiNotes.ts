@@ -1,0 +1,1 @@
+export type GeneratedNotes = { id: string; source: string; summary: string; flashcards: { front: string; back: string }[]; keyPoints: string[]; practiceQuestions: string[]; revisionSheet: string[]; createdAt: string };
